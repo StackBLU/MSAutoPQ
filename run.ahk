@@ -9,8 +9,8 @@ img2 := "C:\Users\<user>\Desktop\MSAutoPQ\2.bmp"
 img3 := "C:\Users\<user>\Desktop\MSAutoPQ\3.bmp"
 
 var1 := 30
-var2 := 30
-var3 := 30
+var2 := 50
+var3 := 50
 scanDelay := 500
 postClickDelay := 500
 paused := true
