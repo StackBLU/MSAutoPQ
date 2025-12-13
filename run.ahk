@@ -7,10 +7,12 @@ targetWindow := "ahk_exe MuMuNxDevice.exe"
 img1 := A_ScriptDir "\1.bmp"
 img2 := A_ScriptDir "\2.bmp"
 img3 := A_ScriptDir "\3.bmp"
+img4 := A_ScriptDir "\4.bmp"
 
 var1 := 30
-var2 := 50
-var3 := 50
+var2 := 60
+var3 := 30
+var4 := 30
 scanDelay := 500
 postClickDelay := 500
 paused := true
@@ -83,6 +85,9 @@ Loop {
         Sleep postClickDelay
     } else if FindImg(img3, 0, 0, A_ScreenWidth, A_ScreenHeight, var3, &fx, &fy) {
         ClickImg(img3, hwnd, fx, fy)
+        Sleep postClickDelay
+    } else if FindImg(img4, 0, 0, A_ScreenWidth, A_ScreenHeight, var4, &fx, &fy) {
+        ClickImg(img4, hwnd, fx, fy)
         Sleep postClickDelay
     }
     Sleep scanDelay
