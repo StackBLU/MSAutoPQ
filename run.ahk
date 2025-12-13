@@ -4,9 +4,9 @@ CoordMode "Pixel", "Screen"
 CoordMode "Mouse", "Screen"
 
 targetWindow := "ahk_exe MuMuNxDevice.exe"
-img1 := "C:\Users\<user>\Desktop\MSAutoPQ\1.bmp"
-img2 := "C:\Users\<user>\Desktop\MSAutoPQ\2.bmp"
-img3 := "C:\Users\<user>\Desktop\MSAutoPQ\3.bmp"
+img1 := A_ScriptDir "\1.bmp"
+img2 := A_ScriptDir "\2.bmp"
+img3 := A_ScriptDir "\3.bmp"
 
 var1 := 30
 var2 := 50
