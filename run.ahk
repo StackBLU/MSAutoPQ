@@ -4,27 +4,21 @@ CoordMode "Pixel", "Screen"
 CoordMode "Mouse", "Screen"
 
 targetWindow := "ahk_exe MuMuNxDevice.exe"
-img1 := A_ScriptDir "\1.bmp"
-img2 := A_ScriptDir "\2.bmp"
-img3 := A_ScriptDir "\3.bmp"
-img4 := A_ScriptDir "\4.bmp"
 
-var1 := 30
-var2 := 60
-var3 := 30
-var4 := 30
+pixel1 := {x: 1518, y: 942, color: 0xABCC1F}
+pixel2 := {x: 868, y: 750, color: 0x1FB4C4}
+pixel3 := {x: 868, y: 948, color: 0x0BAEC1}
+pixel4 := {x: 890, y: 693, color: 0x1AB8C9}
+
 scanDelay := 500
 postClickDelay := 500
 paused := true
-
-guiX := 50
-guiY := 50
 
 g := Gui(, "MSAuto Status")
 g.BackColor := "202020"
 t := g.AddText("cFFFFFF Center w300 h25", "Status: Paused")
 g.AddText("cAAAAAA Center w300 h50", "F8  = Toggle Activation`nF12 = Exit")
-g.Show("x" guiX " y" guiY " w300 h100 NoActivate")
+g.Show("x50 y50 w300 h100 NoActivate")
 
 F8:: { 
     global paused, t
@@ -42,22 +36,8 @@ Fg(hwnd) {
     }
 }
 
-ImgSize(p) {
-    h := LoadPicture(p), b := Buffer(32, 0)
-    DllCall("GetObject", "ptr", h, "int", b.Size, "ptr", b)
-    w := NumGet(b, 4, "int"), hh := NumGet(b, 8, "int")
-    DllCall("DeleteObject", "ptr", h)
-    return [w, hh]
-}
-
-FindImg(p, x1, y1, x2, y2, v, &fx, &fy) {
-    return ImageSearch(&fx, &fy, x1, y1, x2, y2, "*" v " " p)
-}
-
-ClickImg(p, hwnd, fx, fy) {
-    s := ImgSize(p)
-    Fg(hwnd)
-    Click fx + s[1]//2, fy + s[2]//2
+CheckPixel(p) {
+    return PixelSearch(&rx, &ry, p.x, p.y, p.x, p.y, p.color)
 }
 
 Loop {
@@ -65,7 +45,9 @@ Loop {
         Sleep 100
         continue
     }
+    
     Sleep 200
+    
     try {
         hwnd := WinExist(targetWindow)
         if !hwnd {
@@ -77,18 +59,20 @@ Loop {
         Sleep 200
         continue
     }
-    if FindImg(img1, 0, 0, A_ScreenWidth, A_ScreenHeight, var1, &fx, &fy) {
-        ClickImg(img1, hwnd, fx, fy)
+    
+    if CheckPixel(pixel1) {
+        Click pixel1.x, pixel1.y
         Sleep postClickDelay
-    } else if FindImg(img2, 0, 0, A_ScreenWidth, A_ScreenHeight, var2, &fx, &fy) {
-        ClickImg(img2, hwnd, fx, fy)
+    } else if CheckPixel(pixel2) {
+        Click pixel2.x, pixel2.y
         Sleep postClickDelay
-    } else if FindImg(img3, 0, 0, A_ScreenWidth, A_ScreenHeight, var3, &fx, &fy) {
-        ClickImg(img3, hwnd, fx, fy)
+    } else if CheckPixel(pixel3) {
+        Click pixel3.x, pixel3.y
         Sleep postClickDelay
-    } else if FindImg(img4, 0, 0, A_ScreenWidth, A_ScreenHeight, var4, &fx, &fy) {
-        ClickImg(img4, hwnd, fx, fy)
+    } else if CheckPixel(pixel4) {
+        Click pixel4.x, pixel4.y
         Sleep postClickDelay
     }
+    
     Sleep scanDelay
 }
