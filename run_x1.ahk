@@ -5,10 +5,10 @@ CoordMode "Mouse", "Screen"
 
 targetWindow := "ahk_exe MuMuNxDevice.exe"
 
-pixel1 := {x: 1518, y: 942, color: 0xABCC1F}
-pixel2 := {x: 868, y: 750, color: 0x1FB4C4}
-pixel3 := {x: 868, y: 948, color: 0x0BAEC1}
-pixel4 := {x: 890, y: 693, color: 0x1AB8C9}
+pixel1 := {x: 1518, y: 942, color: 0xABCC1F} ; Auto Match
+pixel2 := {x: 868, y: 750, color: 0x1FB4C4} ; Accept
+pixel3 := {x: 868, y: 948, color: 0x0BAEC1} ; Leave
+pixel4 := {x: 890, y: 693, color: 0x1AB8C9} ; Failed to connect
 
 scanDelay := 500
 postClickDelay := 500
